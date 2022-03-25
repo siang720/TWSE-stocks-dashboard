@@ -4,6 +4,7 @@
 # In[ ]:
 
 
+from turtle import width
 import dash
 from dash import html
 from dash import dcc
@@ -17,7 +18,8 @@ import sys
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app.title = "Stock Dashboard"
 
 server = app.server
 
@@ -25,21 +27,22 @@ def reusable_graph_table(name):
     
     div = html.Div(
         className='one-half column',
+        style={'textAlign': 'center'},
         children=[
             dcc.Graph(id=f'{name}-fig'),
             dash_table.DataTable(
                 id=f'{name}-df',
-                style_table={'height': '250px', 'overflowY': 'auto', 'overflowX': 'auto'},
-                style_cell={
-                    'height': 'auto',
-                    'minWidth': '150px',
-                    'width': '150px',
-                    'maxWidth': '150px',
-                    'whiteSpace': 'normal'
-                },
+                style_table={'minWidth': '100%', 'height': '250px', 'overflowY': 'auto', 'overflowX': 'auto', 'margin': '0 auto', 'backgroundColor': 'white'},
                 fixed_columns={'headers': True, 'data': 1},
                 page_size=20,
-                fixed_rows={'headers': True}
+                fixed_rows={'headers': True, 'data': 0},
+                style_cell={
+                    'height': '45px',
+                    'minWidth': '130px', 'width': '130px', 'maxWidth': '130px',
+                    'whiteSpace': 'normal',
+                    'fontSize': '1.2rem'
+                },
+                style_header={'fontWeight': '600'}
             )
         ]
     )
@@ -116,6 +119,6 @@ app.layout = html.Div(
 
 
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(debug=True)
     
 
