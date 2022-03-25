@@ -96,12 +96,12 @@ def get_shareholder_structure(symbol):
             df, 
             values=df.columns[1], 
             names=df.columns[0], 
-            title=f'{symbol} Shareholder Structure',
+            title=f'Shareholder Structure',
             color_discrete_sequence=px.colors.sequential.Tealgrn
     )
     fig.update_traces(textinfo='label+percent')
     fig.update_layout(
-        title_x=0.45,
+        title_x=0.5,
         title_xanchor="left",
         title_y=0.9,
         title_yanchor="top",
@@ -132,7 +132,7 @@ def get_dividends(symbol):
     fig_df = df.iloc[:12][::-1]
     fig = px.bar(fig_df, x=df.columns[0], y=df.columns[4], text=df.columns[4])
     fig.update_layout(
-        title=f'{symbol} Dividends (Yearly)',
+        title=f'Dividends (Yearly)',
         title_x=0,
         title_xanchor="left",
         title_y=0.9,
@@ -162,7 +162,7 @@ def get_inst_investors(symbol):
     fig = px.bar(fig_df, x=fig_df.columns[0], y=[fig_df.columns[1], fig_df.columns[2], fig_df.columns[3]])
     
     fig.update_layout(
-        title=f'{symbol} Institutional Investors',
+        title=f'Institutional Investors',
         title_x=0,
         title_xanchor="left",
         title_y=0.9,
@@ -216,7 +216,7 @@ def get_cashflow(symbol):
     fig.update_traces(mode='markers+lines')
 
     fig.update_layout(
-        title=f'{symbol} Cash Flow',
+        title=f'Cash Flow',
         title_x=0,
         title_xanchor="left",
         title_y=0.9,
@@ -259,7 +259,7 @@ def get_monthly_revenue(symbol):
     )
 
     fig.update_layout(
-        title_text=f'{symbol} Monthly Revenue',
+        title_text=f'Monthly Revenue',
         title_x=0,
         title_xanchor="left",
         title_y=0.9,
@@ -334,7 +334,7 @@ def get_profitability(symbol):
     )
 
     fig.update_layout(
-        title_text=f'{symbol} Profitablity',
+        title_text=f'Profitablity',
         title_x=0,
         title_xanchor="left",
         title_y=0.9,
