@@ -4,7 +4,7 @@
 # In[ ]:
 
 
-from turtle import width
+# from turtle import width
 
 from click import style
 import dash
