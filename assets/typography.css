@@ -1,0 +1,9 @@
+.one-half.column {
+    width: 100%;
+}
+
+@media (min-width:1300px) {
+    .one-half.column {
+        width: 48%;
+    }
+}
