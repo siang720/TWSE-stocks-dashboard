@@ -16,3 +16,4 @@ tenacity==8.0.1
 Werkzeug==2.0.3
 pandas==1.2.4
 requests==2.27.1
+lxml==4.6.3
