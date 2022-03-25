@@ -101,7 +101,7 @@ def get_shareholder_structure(symbol):
     )
     fig.update_traces(textinfo='label+percent')
     fig.update_layout(
-        title_x=0.4,
+        title_x=0.45,
         title_xanchor="left",
         title_y=0.9,
         title_yanchor="top",
