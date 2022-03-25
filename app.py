@@ -5,10 +5,13 @@
 
 
 from turtle import width
+
+from click import style
 import dash
 from dash import html
 from dash import dcc
 from dash import dash_table
+import dash_bootstrap_components as dbc
 
 from dash.dependencies import Input, Output
 from dash.exceptions import PreventUpdate
@@ -16,7 +19,8 @@ from dash.exceptions import PreventUpdate
 from webscraping_v1 import *
 import sys
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css', dbc.themes.BOOTSTRAP]
+PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.title = "Stock Dashboard"
@@ -78,49 +82,84 @@ def reusable_graph_table(name):
 app.layout = html.Div(
     className='container',
     style={
-        'marginTop': 60,
-        'marginBottom': 60,
-        'textAlign': 'center'
+        'textAlign': 'center',
+        'maxWidth': '100%',
+        'margin': '0 auto',
+        'padding': 0
     },
     children=[
+        dbc.Navbar(
+            html.Div(
+                [
+                    html.A(
+                        # Use row and col to control vertical alignment of logo / brand
+                        dbc.Row(
+                            [
+                                dbc.Col(html.Img(src=PLOTLY_LOGO, height="30px")),
+                                dbc.Col(
+                                    dbc.NavbarBrand("TWSE Stock Dashboard", className="ms-2")
+                                ),
+                            ],
+                            align="center"
+                        ),
+                        href="#",
+                        style={"textDecoration": "none"}
+                    )
+                ],
+                style={'display': 'flex', 'alignItem': 'left', 'justifyContent': 'left', 'width': '100%', 'padding': '10px 60px'}
+            ),
+            color="dark",
+            dark=True,
+            style={'marginBottom': '30px'}
+        ),
         html.Div(
-            className='row',
             style={
-                'marginBottom': 30,
+                'textAlign': 'center',
+                'maxWidth': '1200px',
+                'margin': '0 auto',
+                'padding': '0 60px'
             },
             children=[
-                html.H3('Stock Dashboard'),
-                dcc.Dropdown(
-                    id='stock-list-dropdown',
-                    options=get_stock_list(),
-                    placeholder='Search for stock ID (TWSE Limited)',
-                    value='2330.TW'
+                html.Div(
+                    className='row',
+                    style={
+                        'marginBottom': 30,
+                    },
+                    children=[
+                        dcc.Dropdown(
+                            id='stock-list-dropdown',
+                            options=get_stock_list(),
+                            placeholder='Search for stock ID (TWSE Limited)',
+                            value='2330.TW',
+                            style={'fontSize': '1.5rem'}
+                        )
+                    ]
+                ),
+                html.Div(
+                    className='row',
+                    children=[
+                        reusable_graph_table('shareholder_structure'),
+                        reusable_graph_table('inst_investors')
+                    ]
+                ),
+                html.Hr(),
+                html.Div(
+                    className='row',
+                    children=[
+                        reusable_graph_table('monthly_revenue'),
+                        reusable_graph_table('cashflow')
+                    ]
+                ),
+                html.Hr(),
+                html.Div(
+                    className='row',
+                    children=[
+                        reusable_graph_table('profitability'),
+                        reusable_graph_table('dividends')
+                    ]
                 )
             ]
         ),
-        html.Div(
-            className='row',
-            children=[
-                reusable_graph_table('shareholder_structure'),
-                reusable_graph_table('inst_investors')
-            ]
-        ),
-        html.Hr(),
-        html.Div(
-            className='row',
-            children=[
-                reusable_graph_table('monthly_revenue'),
-                reusable_graph_table('cashflow')
-            ]
-        ),
-        html.Hr(),
-        html.Div(
-            className='row',
-            children=[
-                reusable_graph_table('profitability'),
-                reusable_graph_table('dividends')
-            ]
-        )
     ]
 )
 

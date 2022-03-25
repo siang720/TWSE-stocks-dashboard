@@ -17,3 +17,4 @@ Werkzeug==2.0.3
 pandas==1.2.4
 requests==2.27.1
 lxml==4.6.3
+dash-bootstrap-components==1.0.3
