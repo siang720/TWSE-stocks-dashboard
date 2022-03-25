@@ -29,20 +29,26 @@ def reusable_graph_table(name):
         className='one-half column',
         style={'textAlign': 'center'},
         children=[
-            dcc.Graph(id=f'{name}-fig'),
-            dash_table.DataTable(
-                id=f'{name}-df',
-                style_table={'minWidth': '100%', 'height': '250px', 'overflowY': 'auto', 'overflowX': 'auto', 'margin': '0 auto', 'backgroundColor': 'white'},
-                fixed_columns={'headers': True, 'data': 1},
-                page_size=20,
-                fixed_rows={'headers': True, 'data': 0},
-                style_cell={
-                    'height': '45px',
-                    'minWidth': '130px', 'width': '130px', 'maxWidth': '130px',
-                    'whiteSpace': 'normal',
-                    'fontSize': '1.2rem'
-                },
-                style_header={'fontWeight': '600'}
+            dcc.Loading(
+                id=f'ls-loading-{name}', 
+                children=[
+                    dcc.Graph(id=f'{name}-fig'),
+                    dash_table.DataTable(
+                        id=f'{name}-df',
+                        style_table={'minWidth': '100%', 'height': '250px', 'overflowY': 'auto', 'overflowX': 'auto', 'margin': '0 auto', 'backgroundColor': 'white'},
+                        fixed_columns={'headers': True, 'data': 1},
+                        page_size=20,
+                        fixed_rows={'headers': True, 'data': 0},
+                        style_cell={
+                            'height': '45px',
+                            'minWidth': '130px', 'width': '130px', 'maxWidth': '130px',
+                            'whiteSpace': 'normal',
+                            'fontSize': '1.2rem'
+                        },
+                        style_header={'fontWeight': '600'}
+                    )
+                ], 
+                type="circle"
             )
         ]
     )
@@ -87,7 +93,8 @@ app.layout = html.Div(
                 dcc.Dropdown(
                     id='stock-list-dropdown',
                     options=get_stock_list(),
-                    placeholder='Search for stock ID (TWSE Limited)'
+                    placeholder='Search for stock ID (TWSE Limited)',
+                    value='2330.TW'
                 )
             ]
         ),
