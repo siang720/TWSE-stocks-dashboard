@@ -14,12 +14,12 @@ from dash.exceptions import PreventUpdate
 
 from webscraping_v1 import *
 import sys
-import pandas as pd
-import requests
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(external_stylesheets=external_stylesheets)
+
+server = app.server
 
 def reusable_graph_table(name):
     
