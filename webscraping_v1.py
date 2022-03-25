@@ -98,7 +98,7 @@ def get_shareholder_structure(symbol):
             names=df.columns[0], 
             title=f'{symbol} Shareholder Structure',
             color_discrete_sequence=px.colors.sequential.Tealgrn
-          )
+    )
     fig.update_traces(textinfo='label+percent')
     fig.update_layout(
         title_x=0.4,
@@ -212,7 +212,7 @@ def get_cashflow(symbol):
                 fig_df.columns[3], 
                 fig_df.columns[4]
             ]
-          )
+    )
     fig.update_traces(mode='markers+lines')
 
     fig.update_layout(
