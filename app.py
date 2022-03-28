@@ -1,12 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
-# from turtle import width
-# from click import style
-
 import dash
 from dash import html
 from dash import dcc
@@ -22,7 +16,38 @@ import sys
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css', dbc.themes.BOOTSTRAP]
 PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(
+    __name__, 
+    external_stylesheets=external_stylesheets,
+    meta_tags=[
+        {
+            'name': 'description',
+            'content': 'TWSE stocks dashboard which help investors monitoring their stocks. The reports include shareholder structure, recent trading records of institutional investors, monthly revenue, cash flow, profitability,and dividends.'
+        },
+        {
+            'property': 'og:type',
+            'content': 'website'
+        },
+        {
+            'name': 'author',
+            'content': 'Sean Liu'
+        },
+        {
+            'http-equiv': 'X-UA-Compatible',
+            'content': 'IE=edge'
+        },
+        {
+            'name': 'viewport',
+            'content': 'width=device-width, initial-scale=1.0'
+        },
+        {
+            'name': 'image',
+            'property': 'og:image',
+            'content': 'https://i.imgur.com/oRR5QYK.png'
+        }
+    ]
+)
+
 app.title = "Stock Dashboard"
 
 server = app.server
