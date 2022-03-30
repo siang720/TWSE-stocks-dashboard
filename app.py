@@ -52,19 +52,20 @@ app.title = "Stock Dashboard"
 
 server = app.server
 
-def reusable_graph_table(name):
+def reusable_graph_table(title, name):
     
     div = html.Div(
         className='one-half column',
-        style={'textAlign': 'center'},
+        style={'textAlign': 'center', 'minHeight': '70vh'},
         children=[
             dcc.Loading(
-                id=f'ls-loading-{name}', 
+                id=f'ls-loading-{name}',
                 children=[
+                    html.Div(f'{title}', className='graph-title'),
                     dcc.Graph(id=f'{name}-fig'),
                     dash_table.DataTable(
                         id=f'{name}-df',
-                        style_table={'minWidth': '100%', 'height': '250px', 'overflowY': 'auto', 'overflowX': 'auto', 'margin': '0 auto', 'backgroundColor': 'white'},
+                        style_table={'height': '250px','minWidth': '100%', 'overflowY': 'auto', 'overflowX': 'auto', 'margin': '0 auto', 'backgroundColor': 'white'},
                         fixed_columns={'headers': True, 'data': 1},
                         page_size=20,
                         fixed_rows={'headers': True, 'data': 0},
@@ -135,7 +136,7 @@ app.layout = html.Div(
             ),
             color="dark",
             dark=True,
-            style={'marginBottom': '30px'}
+            style={'marginBottom': '10px'}
         ),
         html.Div(
             style={
@@ -148,7 +149,7 @@ app.layout = html.Div(
                 html.Div(
                     className='row',
                     style={
-                        'marginBottom': 30,
+                        'marginBottom': '10px',
                     },
                     children=[
                         dcc.Dropdown(
@@ -163,24 +164,24 @@ app.layout = html.Div(
                 html.Div(
                     className='row',
                     children=[
-                        reusable_graph_table('shareholder_structure'),
-                        reusable_graph_table('inst_investors')
+                        reusable_graph_table('Shareholder Structure', 'shareholder_structure'),
+                        reusable_graph_table('Overbough/oversold of Institutional Investors','inst_investors')
                     ]
                 ),
                 html.Hr(),
                 html.Div(
                     className='row',
                     children=[
-                        reusable_graph_table('monthly_revenue'),
-                        reusable_graph_table('cashflow')
+                        reusable_graph_table('Monthly Revenue', 'monthly_revenue'),
+                        reusable_graph_table('Cash Flow', 'cashflow')
                     ]
                 ),
                 html.Hr(),
                 html.Div(
                     className='row',
                     children=[
-                        reusable_graph_table('profitability'),
-                        reusable_graph_table('dividends')
+                        reusable_graph_table('Profitability', 'profitability'),
+                        reusable_graph_table('Dividends', 'dividends')
                     ]
                 )
             ]
@@ -191,5 +192,3 @@ app.layout = html.Div(
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-    
-

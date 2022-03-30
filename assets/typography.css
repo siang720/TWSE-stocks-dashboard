@@ -2,6 +2,15 @@
     width: 100%;
 }
 
+.graph-title {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #2B3E5E;
+    text-transform: capitalize;
+    margin-bottom: 0;
+    padding-top: 12px;
+}
+
 @media (min-width:1300px) {
     .one-half.column {
         width: 48%;
